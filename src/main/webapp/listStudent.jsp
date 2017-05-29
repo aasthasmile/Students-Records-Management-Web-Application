@@ -9,14 +9,38 @@
 <script type="text/javascript">
 	function oninit() {
 		var htttp = new XMLHttpRequest();
-		http.get("GET","", false);
+		http.get("GET", "", false);
 		http.send(null);
 		return http.responseText();
 	}
 </script>
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/cerulean/bootstrap.min.css"
+	rel="stylesheet">
 </head>
 <body onload="oninit()">
-	<table border="1" cellspacing="0" cellpadding="6">
+
+	<!-- ---Navbar Header -->
+	<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Student Records Management </a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li class="active"><a href="#">Home</a></li>
+		</ul>
+		
+	</div>
+	</nav>
+	<!-- --Navbar end here -->
+
+<div class="row" >
+<div class="col-md-3"></div>
+	<div class="col-md-6">
+	<table border="1" cellspacing="0" cellpadding="6"  class="table table-bordered table-striped">
 		<thead>
 			<tr>
 				<th>Student ID</th>
@@ -59,9 +83,12 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
+	<div class="col-md-3"></div>
+	</div>
 	<p>
-	<form action="webapi/student/allStudent/insert" method="post">
-		<button value="submit">Add Student</button>
+	<form action="webapi/student/insert" method="post">
+		<button value="submit" align="center">Add Student</button>
 	</form>
 	</p>
 </body>

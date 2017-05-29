@@ -27,6 +27,16 @@ public class Student {
 		this.gender = gender;
 	}
 
+	
+
+	public Student(String firstname, String lastname, int age, String gender) {
+		super();
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.age = age;
+		this.gender = gender;
+	}
+
 	public int getSid() {
 		return sid;
 	}

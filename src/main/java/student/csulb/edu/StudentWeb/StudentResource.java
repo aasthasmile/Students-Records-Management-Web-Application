@@ -25,6 +25,7 @@ import student.csulb.edu.dao.StudentDAO;
 import student.csulb.edu.dao.StudentDAOImplementation;
 import student.csulb.edu.model.Course;
 import student.csulb.edu.model.Student;
+import student.csulb.edu.util.DBUtil;
 
 @Path("student")
 public class StudentResource {
@@ -51,22 +52,38 @@ public class StudentResource {
 	}
 
 	@POST
-	@Path("/allStudent/insert")
-	public Response addStudent(@Context ServletContext context) {
+	@Path("/insert")
+	public Response redirectToAddStudent(@Context ServletContext context) {
 		System.out.println("Inside insert1");
-		
+	
 		UriBuilder ubu = UriBuilder.fromUri(context.getContextPath());
-		ubu.path("student.jsp");
+		ubu.path("addStudent.jsp");
 		return Response.seeOther(ubu.build()).build();
 	}
 	
-	
+	@POST
+	@Path("/insert/sid")
+	@Produces(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public Response addStudent(@FormParam("firstName") String fname,
+			@FormParam("lastName") String lname, @FormParam("age") int age, @FormParam("gender") String gender,
+			@Context ServletContext context) throws Exception {
+
+		System.out.println("Inside Update Student");
+		Student student = new Student(fname, lname, age, gender);
+		studentdao.addStudent(student);
+
+		System.out.println("forwarding...");
+
+		System.out.println(context.getContextPath());
+		return getStudentInfo(context);
+	}
 
 	@POST
 	@Path("/update/sid/{id}")
 	@Produces(MediaType.APPLICATION_XML)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public Response addStudent(@PathParam("id") int id, @FormParam("firstName") String fname,
+	public Response updateStudent(@PathParam("id") int id, @FormParam("firstName") String fname,
 			@FormParam("lastName") String lname, @FormParam("age") int age, @FormParam("gender") String gender,
 			@Context ServletContext context) throws Exception {
 
@@ -82,7 +99,7 @@ public class StudentResource {
 
 	@POST
 	@Path("/update/{id}")
-	public Response updateStudent(@PathParam("id") int id, @Context ServletContext context) {
+	public Response redirectToUpdateStudent(@PathParam("id") int id, @Context ServletContext context) {
 		Student student = new Student();
 		student = studentdao.getStudentById(id);
 		System.out.println("----Update--- " + student.toString());
