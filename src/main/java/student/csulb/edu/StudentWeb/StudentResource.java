@@ -64,7 +64,7 @@ public class StudentResource {
 	@POST
 	@Path("/insert/sid")
 	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addStudent(@FormParam("firstName") String fname,
 			@FormParam("lastName") String lname, @FormParam("age") int age, @FormParam("gender") String gender,
 			@Context ServletContext context) throws Exception {

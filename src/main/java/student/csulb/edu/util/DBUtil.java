@@ -34,12 +34,13 @@ public class DBUtil {
 
 	public ResultSet getResultSet(String sqlQuery, Connection conn) throws SQLException {
 
-		System.out.println(sqlQuery);
+		//System.out.println(sqlQuery);
 		String sqlquery = sqlQuery;
 		dbcon = conn;
 		try {
 			dbStmt = dbcon.createStatement();
 			dbRst = dbStmt.executeQuery(sqlquery);
+			System.out.println(dbRst);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -58,6 +59,8 @@ public class DBUtil {
 
 	public static void main(String[] args) {
 		DBUtil.SetDBConnection();
+		
+		
 	}
 
 }
